@@ -70,3 +70,5 @@ while run:
             run = False
     pygame.display.flip()
 pygame.quit
+
+print('pluh')
