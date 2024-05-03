@@ -83,6 +83,12 @@ class Ball:
         return self.selected
 
 
+class Triangle:
+    pass
+
+class Box:
+    pass
+
 def draw_walls():
     left = pygame.draw.line(screen, 'white', (0, 0), (0, HEIGHT), wall_thickness)
     right = pygame.draw.line(screen, 'white', (WIDTH, 0), (WIDTH, HEIGHT), wall_thickness)
