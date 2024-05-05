@@ -84,6 +84,9 @@ class Ball:
 
 
 class Triangle:
+    pygame.draw.polygon(screen,'red',((100,100),(200,200),(300,300)))
+
+class Slope:
     pass
 
 class Box:
@@ -135,7 +138,6 @@ while run:
     ball2.y_speed = ball2.check_gravity()
     ball3.y_speed = ball3.check_gravity()
     ball4.y_speed = ball4.check_gravity()
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
