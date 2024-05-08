@@ -13,12 +13,12 @@ timer = pygame.time.Clock()
 
 #varibles
 gravity = 0.5
-wall_thickness = 10
+wall_thickness = 100
 bounce_stop = 0.3
 # track pos of mouse to get momentom vector
 mouse_trajectory = []
 
-
+wall_list = []
 
 
 
@@ -81,24 +81,39 @@ class Ball:
         if self.circle.collidepoint(pos):
             self.selected = True
         return self.selected
-
+ 
 
 class Triangle:
-    pygame.draw.polygon(screen,'red',((100,100),(200,200),(300,300)))
+     pygame.draw.polygon(screen, (0, 255, 255), ((25,75),(320,125),(250,375)))
 
 class Slope:
-    pass
+    def __init__(self,color,cord_x1,cord_y1,cord_x2,cord_y2,name):
+        self.color = color
+        self.cord_x1 = cord_x1
+        self.cord_y1 = cord_y1
+        self.cord_x2 = cord_x2
+        self.cord_y2 = cord_y2
+        self.name = name
 
+    def draw_walls(self):
+        left = pygame.draw.line(screen, 'white', (0, 0), (0, HEIGHT), wall_thickness)
+        right = pygame.draw.line(screen, 'white', (WIDTH, 0), (WIDTH, HEIGHT), wall_thickness)
+        top = pygame.draw.line(screen, 'white', (0, 0), (WIDTH, 0), wall_thickness)
+        bottom = pygame.draw.line(screen, 'white', (0, HEIGHT), (WIDTH, HEIGHT), wall_thickness)
+        wall_list = [left, right, top, bottom]
+        
+        
+        name = pygame.draw.line(screen, self.color, (self.cord_x1, self.cord_y1), (self.cord_x2, self.cord_y2), wall_thickness)
+        wall_list.append(name)
+        
+        
+        return wall_list
+    
+    
 class Box:
     pass
 
-def draw_walls():
-    left = pygame.draw.line(screen, 'white', (0, 0), (0, HEIGHT), wall_thickness)
-    right = pygame.draw.line(screen, 'white', (WIDTH, 0), (WIDTH, HEIGHT), wall_thickness)
-    top = pygame.draw.line(screen, 'white', (0, 0), (WIDTH, 0), wall_thickness)
-    bottom = pygame.draw.line(screen, 'white', (0, HEIGHT), (WIDTH, HEIGHT), wall_thickness)
-    wall_list = [left, right, top, bottom]
-    return wall_list
+
 
 def calc_motion_vector():
     x_speed =0
@@ -115,6 +130,7 @@ ball3 = Ball(50,50,30,'blue',100, 0.4, 0,0,3,0.03)
 ball4 = Ball(50,30,20,'pink',100,0.5,0,0,3,0.3)
 balls = [ball1, ball2, ball3, ball4]
 
+slope = Slope('white',0,0,WIDTH,HEIGHT,1)
 run = True
 while run:
     timer.tick(fps)
@@ -125,7 +141,7 @@ while run:
         mouse_trajectory.pop(0)
     x_push, y_push = calc_motion_vector()
 
-    walls = draw_walls()
+    walls = Slope.draw_walls
     ball1.draw()
     ball2.draw()
     ball3.draw()
