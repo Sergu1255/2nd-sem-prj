@@ -3,8 +3,8 @@ import pygame
 pygame.init()
 
 
-WIDTH = 600
-HEIGHT = 600
+WIDTH = 1000
+HEIGHT = 1000
 
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 
@@ -13,13 +13,14 @@ timer = pygame.time.Clock()
 
 #varibles
 gravity = 0.5
-wall_thickness = 100
+wall_thickness = 20
 bounce_stop = 0.3
 # track pos of mouse to get momentom vector
 mouse_trajectory = []
 
 wall_list = []
 
+io=''
 
 
 
@@ -95,14 +96,7 @@ class Slope:
         self.cord_y2 = cord_y2
         self.name = name
 
-    def draw_walls(self):
-        left = pygame.draw.line(screen, 'white', (0, 0), (0, HEIGHT), wall_thickness)
-        right = pygame.draw.line(screen, 'white', (WIDTH, 0), (WIDTH, HEIGHT), wall_thickness)
-        top = pygame.draw.line(screen, 'white', (0, 0), (WIDTH, 0), wall_thickness)
-        bottom = pygame.draw.line(screen, 'white', (0, HEIGHT), (WIDTH, HEIGHT), wall_thickness)
-        wall_list = [left, right, top, bottom]
-        
-        
+    def draw_slope(self):
         name = pygame.draw.line(screen, self.color, (self.cord_x1, self.cord_y1), (self.cord_x2, self.cord_y2), wall_thickness)
         wall_list.append(name)
         
@@ -123,6 +117,17 @@ def calc_motion_vector():
         y_speed = (mouse_trajectory[-1][1] - mouse_trajectory[0][1]) / len(mouse_trajectory)
     return x_speed, y_speed
 
+def draw_walls():
+    left = pygame.draw.line(screen, 'white', (0, 0), (0, HEIGHT), wall_thickness)
+    right = pygame.draw.line(screen, 'white', (WIDTH, 0), (WIDTH, HEIGHT), wall_thickness)
+    top = pygame.draw.line(screen, 'white', (0, 0), (WIDTH, 0), wall_thickness)
+    bottom = pygame.draw.line(screen, 'white', (0, HEIGHT), (WIDTH, HEIGHT), wall_thickness)
+    wall_list.append(left)
+    wall_list.append(right)
+    wall_list.append(top)
+    wall_list.append(bottom)
+    return wall_list
+
 # balls
 ball1 = Ball(50,50,30,'red',100, 0.9, 0,0,1, 0.02)
 ball2 = Ball(50,50,30,'green',10, 0.7, 0,0,2,0.05)
@@ -130,7 +135,8 @@ ball3 = Ball(50,50,30,'blue',100, 0.4, 0,0,3,0.03)
 ball4 = Ball(50,30,20,'pink',100,0.5,0,0,3,0.3)
 balls = [ball1, ball2, ball3, ball4]
 
-slope = Slope('white',0,0,WIDTH,HEIGHT,1)
+slope1 = Slope('white',0,0,WIDTH,HEIGHT,io)
+
 run = True
 while run:
     timer.tick(fps)
@@ -141,7 +147,8 @@ while run:
         mouse_trajectory.pop(0)
     x_push, y_push = calc_motion_vector()
 
-    walls = Slope.draw_walls
+    slope1.draw_slope()
+    draw_walls()
     ball1.draw()
     ball2.draw()
     ball3.draw()
@@ -171,4 +178,3 @@ while run:
 
     pygame.display.flip()
 pygame.quit()
-
