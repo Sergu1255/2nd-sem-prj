@@ -19,7 +19,7 @@ bounce_stop = 0.3
 mouse_trajectory = []
 
 wall_list = []
-
+slopes = []
 io=''
 
 
