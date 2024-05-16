@@ -105,7 +105,20 @@ class Slope:
     
     
 class Box:
-    pass
+    def __init__(self,pos_x,pos_y,color,mass,retension,id,x_speed,y_speed,friction):
+            self.pos_x = pos_x
+            self.pos_y = pos_y
+            self.color = color
+            self.mass = mass
+            self.retension = retension
+            self.id = id
+            self.x_speed = x_speed
+            self.y_speed = y_speed
+            self.friction = friction
+
+    def draw_square(self):
+        id = pygame.draw.rect(screen, self.color, (self.pos_x, self.pos_y, 50, 50))
+
 
 
 
@@ -137,6 +150,7 @@ balls = [ball1, ball2, ball3, ball4]
 
 slope1 = Slope('white',0,0,WIDTH,HEIGHT,io)
 
+box1 = Box()
 run = True
 while run:
     timer.tick(fps)
