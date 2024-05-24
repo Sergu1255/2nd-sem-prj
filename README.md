@@ -14,4 +14,4 @@ This week I successfully worked as I was able to create code that uses gravity a
 
 # May 13 - 17
 
-Throughout this week I have been working on creating a new object that will be used for my project this being a square mass this is important as in most of the objects that are presented within physics the mass is presented as a square. Although I have very little time to complete my project hopefully I will be able to finish by the weekend and hopefully get the slope fully functional.
+Throughout this week I have been working on creating a new object that will be used for my project this being a square mass this is important as in most of the objects that are presented within physics the mass is presented as a square. Although I have very little time to complete my project hopefully I will be able to finish by the weekend and hopefully get the slope fully functional. this can be seen within [here](Masson_slope.py) underlines 107
